@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { Post } from './components/Post';
+
+
+
 
 function App() {
+//STATE 
+  const [posts, setPosts] = useState([]);
+
+  //USE EFFECT
+  useEffect(() => {
+    getPosts();
+
+    //FETCH DATA
+  async function getPosts() {
+    const response = await fetch("https://www.reddit.com/r/popular.json");
+    const data = await response.json();
+
+    console.log(data.data.children);
+    setPosts(data.data.children);
+  }
+  }, [setPosts])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {posts.map((post, idx) => (
+        <Post title={post.data.title} image={post.data.thumbnail} url={post.data.url} key={idx}/>
+      )
+      )}
     </div>
   );
 }

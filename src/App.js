@@ -26,7 +26,16 @@ function App() {
   return (
     <div className="App">
       {posts.map((post, idx) => (
-        <Post title={post.data.title} image={post.data.thumbnail} url={post.data.url} key={idx}/>
+        <Post 
+        title={post.data.title} 
+        image={post.data.thumbnail} 
+        url={post.data.url} 
+        author={post.data.author} 
+        body={post.data.selftext}
+        media={post.data.media}
+        numComments={post.data.num_comments}
+        key={idx}
+        />
       )
       )}
     </div>

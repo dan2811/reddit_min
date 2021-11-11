@@ -1,15 +1,9 @@
-
+import React from 'react'
 import ReactPlayer from 'react-player'
 
+export function Video(videoUrl) {    
 
-export function Video(media) {
-    if(media !== null) {
-        if(media.url.reddit_video) {
-        console.log(media.url.reddit_video)
-        }
-        return <ReactPlayer url={media.url.reddit_video} />
-    } else {
-        return ""
-    }
-
+        return (
+            <ReactPlayer url={videoUrl.videoUrl} controls width="100%" height="100%"/>
+        )
 }
